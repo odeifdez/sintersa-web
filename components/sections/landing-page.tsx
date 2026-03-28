@@ -14,9 +14,11 @@ import {
   Mail,
   MapPin,
   Menu,
+  Moon,
   Phone,
   Shield,
   Sparkles,
+  Sun,
   X
 } from "lucide-react";
 
@@ -62,6 +64,7 @@ const extraOptions = ["Embalaje premium", "Montaje de muebles", "Guardamuebles",
 export function SintersaLanding() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
   const [calcResult, setCalcResult] = useState<string>("");
   const [calcForm, setCalcForm] = useState<CalculatorForm>({
     moveType: "",
@@ -83,6 +86,19 @@ export function SintersaLanding() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    const storedTheme = window.localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const darkMode = storedTheme ? storedTheme === "dark" : prefersDark;
+    setIsDark(darkMode);
+    document.documentElement.classList.toggle("dark", darkMode);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDark);
+    window.localStorage.setItem("theme", isDark ? "dark" : "light");
+  }, [isDark]);
 
   useEffect(() => {
     const hero = heroRef.current;
@@ -261,6 +277,14 @@ export function SintersaLanding() {
           </nav>
 
           <div className="hidden items-center gap-3 lg:flex">
+            <button
+              type="button"
+              onClick={() => setIsDark((prev) => !prev)}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-white/70 text-foreground transition hover:border-primary/40 hover:text-primary dark:bg-slate-900/70"
+              aria-label={isDark ? "Activar modo claro" : "Activar modo oscuro"}
+            >
+              {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
             <Button asChild variant="outline">
               <a href="#calculadora">Generar presupuesto</a>
             </Button>
@@ -269,13 +293,23 @@ export function SintersaLanding() {
             </Button>
           </div>
 
-          <button
-            className="rounded-full border border-border p-2 text-foreground lg:hidden"
-            onClick={() => setMobileOpen((prev) => !prev)}
-            aria-label="Abrir menú"
-          >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+          <div className="flex items-center gap-2 lg:hidden">
+            <button
+              type="button"
+              onClick={() => setIsDark((prev) => !prev)}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white/70 text-foreground transition hover:border-primary/40 hover:text-primary dark:bg-slate-900/70"
+              aria-label={isDark ? "Activar modo claro" : "Activar modo oscuro"}
+            >
+              {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
+            <button
+              className="rounded-full border border-border p-2 text-foreground"
+              onClick={() => setMobileOpen((prev) => !prev)}
+              aria-label="Abrir menú"
+            >
+              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </div>
 
         {mobileOpen && (
@@ -323,7 +357,7 @@ export function SintersaLanding() {
               </div>
             </div>
 
-            <Card className="hero-visual glass-panel relative overflow-hidden border-white/70 p-2">
+            <Card className="hero-visual glass-panel relative overflow-hidden border-white/70 p-2 dark:border-white/10">
               <CardContent className="hero-grid-surface relative overflow-hidden rounded-[1.2rem] p-7 text-white sm:p-9">
                 <div className="absolute -right-24 -top-24 h-56 w-56 rounded-full bg-white/15 blur-2xl" />
                 <Badge variant="secondary" className="mb-6 w-fit border-white/20 bg-white/15 text-white">
@@ -350,7 +384,7 @@ export function SintersaLanding() {
 
           <div data-stagger className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {stats.map((item) => (
-              <Card key={item.label} className="glass-panel border-white/80">
+              <Card key={item.label} className="glass-panel border-white/80 dark:border-white/10">
                 <CardContent className="p-5">
                   <p data-count={item.value} data-suffix={item.suffix} className="text-3xl font-semibold tracking-tight">
                     0
@@ -372,7 +406,7 @@ export function SintersaLanding() {
             {services.map((service) => {
               const Icon = service.icon;
               return (
-                <Card key={service.title} className="glass-panel border-white/80 transition hover:-translate-y-0.5">
+                <Card key={service.title} className="glass-panel border-white/80 transition hover:-translate-y-0.5 dark:border-white/10">
                   <CardContent className="p-6">
                     <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
                       <Icon className="h-5 w-5" />
@@ -396,7 +430,7 @@ export function SintersaLanding() {
             {benefits.map((item) => {
               const Icon = item.icon;
               return (
-                <Card key={item.title} className="border-white/80 bg-white/90">
+                <Card key={item.title} className="border-white/80 bg-white/90 dark:border-white/10 dark:bg-slate-900/70">
                   <CardContent className="p-6">
                     <Icon className="h-5 w-5 text-primary" />
                     <h3 className="mt-5 text-lg font-semibold">{item.title}</h3>
@@ -409,7 +443,7 @@ export function SintersaLanding() {
         </section>
 
         <section id="calculadora" className="container pb-24" data-reveal>
-          <Card className="overflow-hidden border-white/80 bg-gradient-to-b from-white to-[#f4f8ff]">
+          <Card className="overflow-hidden border-white/80 bg-gradient-to-b from-white to-[#f4f8ff] dark:border-white/10 dark:from-slate-900 dark:to-slate-950">
             <CardContent className="p-7 md:p-10">
               <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
                 <div>
@@ -519,7 +553,10 @@ export function SintersaLanding() {
                       <p className="mb-2 text-sm font-medium">Servicios extra</p>
                       <div className="grid gap-2 sm:grid-cols-2">
                         {extraOptions.map((extra) => (
-                          <label key={extra} className="flex items-center gap-3 rounded-xl border border-border bg-white px-3 py-2 text-sm">
+                          <label
+                            key={extra}
+                            className="flex items-center gap-3 rounded-xl border border-border bg-white px-3 py-2 text-sm dark:bg-slate-900/70"
+                          >
                             <Checkbox
                               checked={calcForm.extras.includes(extra)}
                               onCheckedChange={(checked) => handleExtra(Boolean(checked), extra)}
@@ -576,7 +613,7 @@ export function SintersaLanding() {
           />
           <div data-stagger className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
             {processSteps.map((step, index) => (
-              <Card key={step} className="relative border-white/80 bg-white/90">
+              <Card key={step} className="relative border-white/80 bg-white/90 dark:border-white/10 dark:bg-slate-900/70">
                 <CardContent className="p-6">
                   <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
                     {index + 1}
@@ -599,7 +636,7 @@ export function SintersaLanding() {
           />
           <div data-stagger className="mt-10 grid gap-4 lg:grid-cols-3">
             {testimonials.map((testimonial) => (
-              <Card key={testimonial.name} className="border-white/80 bg-white/90">
+              <Card key={testimonial.name} className="border-white/80 bg-white/90 dark:border-white/10 dark:bg-slate-900/70">
                 <CardContent className="p-6">
                   <p className="text-sm leading-7 text-muted-foreground">“{testimonial.quote}”</p>
                   <div className="mt-6 border-t border-border pt-4">
@@ -615,7 +652,7 @@ export function SintersaLanding() {
         </section>
 
         <section id="cobertura" className="container pb-24" data-reveal>
-          <Card className="border-white/80 bg-white/90">
+          <Card className="border-white/80 bg-white/90 dark:border-white/10 dark:bg-slate-900/70">
             <CardContent className="grid gap-8 p-7 md:grid-cols-[0.8fr_1.2fr] md:p-10">
               <div>
                 <Badge className="mb-4">Cobertura</Badge>
@@ -629,7 +666,7 @@ export function SintersaLanding() {
                 {coverage.map((city) => (
                   <div
                     key={city}
-                    className="rounded-xl border border-border bg-gradient-to-b from-white to-slate-50 px-4 py-4 text-sm font-medium"
+                    className="rounded-xl border border-border bg-gradient-to-b from-white to-slate-50 px-4 py-4 text-sm font-medium dark:from-slate-900 dark:to-slate-800"
                   >
                     {city}
                   </div>
@@ -648,7 +685,7 @@ export function SintersaLanding() {
             title="Preguntas frecuentes"
             description="Respuestas claras para ayudarte a decidir con seguridad."
           />
-          <Card className="mt-10 border-white/80 bg-white/90">
+          <Card className="mt-10 border-white/80 bg-white/90 dark:border-white/10 dark:bg-slate-900/70">
             <CardContent className="p-6 md:p-8">
               <Accordion type="single" collapsible>
                 {faqs.map((faq, index) => (
@@ -663,7 +700,7 @@ export function SintersaLanding() {
         </section>
 
         <section id="contacto" className="container pb-24" data-reveal>
-          <Card className="overflow-hidden border-white/80 bg-white/95">
+          <Card className="overflow-hidden border-white/80 bg-white/95 dark:border-white/10 dark:bg-slate-900/80">
             <CardContent className="grid gap-8 p-7 md:grid-cols-[0.9fr_1.1fr] md:p-10">
               <div>
                 <Badge className="mb-4">Contacto</Badge>
@@ -736,7 +773,10 @@ export function SintersaLanding() {
                   <p className="mb-2 text-sm font-medium">Servicios extra</p>
                   <div className="grid gap-2 sm:grid-cols-2">
                     {extraOptions.map((extra) => (
-                      <label key={extra} className="flex items-center gap-3 rounded-xl border border-border bg-white px-3 py-2 text-sm">
+                      <label
+                        key={extra}
+                        className="flex items-center gap-3 rounded-xl border border-border bg-white px-3 py-2 text-sm dark:bg-slate-900/70"
+                      >
                         <Checkbox name="extras" value={extra} />
                         {extra}
                       </label>
@@ -772,7 +812,7 @@ export function SintersaLanding() {
         </section>
       </main>
 
-      <footer className="border-t border-border/80 bg-white/80 py-12 backdrop-blur-sm">
+      <footer className="border-t border-border/80 bg-white/80 py-12 backdrop-blur-sm dark:bg-slate-950/70">
         <div className="container grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <p className="text-xl font-semibold tracking-tight">Sintersa</p>

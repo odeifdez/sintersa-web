@@ -396,7 +396,7 @@ export function SintersaLanding() {
           </div>
         </section>
 
-        <section id="servicios" className="container py-24" data-reveal>
+        <section id="servicios" className="container scroll-mt-28 py-24 md:scroll-mt-32" data-reveal>
           <SectionHeader
             overline="Servicios"
             title="Soluciones de mudanza diseñadas para máxima tranquilidad"
@@ -420,7 +420,7 @@ export function SintersaLanding() {
           </div>
         </section>
 
-        <section id="por-que" className="container pb-24" data-reveal>
+        <section id="por-que" className="container scroll-mt-28 pb-24 md:scroll-mt-32" data-reveal>
           <SectionHeader
             overline="Por qué Sintersa"
             title="Un estándar premium que se nota en cada detalle"
@@ -442,7 +442,7 @@ export function SintersaLanding() {
           </div>
         </section>
 
-        <section id="calculadora" className="container pb-24" data-reveal>
+        <section id="calculadora" className="container scroll-mt-28 pb-24 md:scroll-mt-32" data-reveal>
           <Card className="overflow-hidden border-white/80 bg-gradient-to-b from-white to-[#f4f8ff] dark:border-white/10 dark:from-slate-900 dark:to-slate-950">
             <CardContent className="p-7 md:p-10">
               <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
@@ -605,7 +605,7 @@ export function SintersaLanding() {
           </Card>
         </section>
 
-        <section id="proceso" className="container pb-24" data-reveal>
+        <section id="proceso" className="container scroll-mt-28 pb-24 md:scroll-mt-32" data-reveal>
           <SectionHeader
             overline="Proceso"
             title="Un flujo operativo claro de principio a fin"
@@ -651,7 +651,7 @@ export function SintersaLanding() {
           </div>
         </section>
 
-        <section id="cobertura" className="container pb-24" data-reveal>
+        <section id="cobertura" className="container scroll-mt-28 pb-24 md:scroll-mt-32" data-reveal>
           <Card className="border-white/80 bg-white/90 dark:border-white/10 dark:bg-slate-900/70">
             <CardContent className="grid gap-8 p-7 md:grid-cols-[0.8fr_1.2fr] md:p-10">
               <div>
@@ -679,7 +679,7 @@ export function SintersaLanding() {
           </Card>
         </section>
 
-        <section id="faq" className="container pb-24" data-reveal>
+        <section id="faq" className="container scroll-mt-28 pb-24 md:scroll-mt-32" data-reveal>
           <SectionHeader
             overline="FAQ"
             title="Preguntas frecuentes"
@@ -699,7 +699,7 @@ export function SintersaLanding() {
           </Card>
         </section>
 
-        <section id="contacto" className="container pb-24" data-reveal>
+        <section id="contacto" className="container scroll-mt-28 pb-24 md:scroll-mt-32" data-reveal>
           <Card className="overflow-hidden border-white/80 bg-white/95 dark:border-white/10 dark:bg-slate-900/80">
             <CardContent className="grid gap-8 p-7 md:grid-cols-[0.9fr_1.1fr] md:p-10">
               <div>

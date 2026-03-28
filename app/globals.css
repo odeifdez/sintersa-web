@@ -53,6 +53,10 @@ body {
   min-height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   @apply bg-background text-foreground antialiased;
   font-family: "SF Pro Display", "SF Pro Text", "Avenir Next", "Segoe UI", "Inter", sans-serif;

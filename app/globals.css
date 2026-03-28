@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 210 30% 98%;
+  --foreground: 220 24% 12%;
+  --card: 0 0% 100%;
+  --card-foreground: 220 24% 12%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 220 24% 12%;
+  --primary: 217 82% 44%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 26% 94%;
+  --secondary-foreground: 220 20% 22%;
+  --muted: 214 20% 92%;
+  --muted-foreground: 216 14% 42%;
+  --accent: 214 55% 93%;
+  --accent-foreground: 220 24% 14%;
+  --border: 215 20% 88%;
+  --input: 214 24% 89%;
+  --ring: 217 82% 44%;
+  --radius: 1rem;
+}
+
+* {
+  @apply border-border;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+  font-family: "SF Pro Display", "SF Pro Text", "Avenir Next", "Segoe UI", "Inter", sans-serif;
+  background-image:
+    radial-gradient(circle at 8% 8%, rgba(19, 93, 255, 0.12), transparent 24%),
+    radial-gradient(circle at 92% 6%, rgba(17, 67, 158, 0.1), transparent 18%),
+    linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(245, 248, 255, 0.95) 45%, rgba(255, 255, 255, 1));
+}
+
+::selection {
+  background: rgba(23, 89, 231, 0.22);
+  color: hsl(var(--foreground));
+}
+
+.glass-panel {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.82));
+  backdrop-filter: blur(10px);
+}
+
+.grid-overlay {
+  background-image: linear-gradient(rgba(148, 163, 184, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+.hero-grid-surface {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.2), transparent 42%),
+    linear-gradient(135deg, #0c2f74, #0f4dba 58%, #8ab6ff);
+  background-size: 34px 34px, 34px 34px, auto, auto;
+}
